@@ -1,5 +1,5 @@
 .form__submit {
-    margin: 48px 0 0;
+    margin: 8px 0 0;
     padding: 0;
     max-width: 358px;
     width: 100%;
@@ -32,7 +32,7 @@
     .form__submit {
       max-width: 238px;
       height: 46px;
-      margin-top: 20px;
+      margin-top: 15px;
       font-size: 14px;
       line-height: 16.94px;
     }
