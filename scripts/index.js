@@ -54,7 +54,7 @@ function handleFormSubmit(evt) {
   evt.preventDefault();
   const title = evt.srcElement.querySelector('#title').value;
   const link = evt.srcElement.querySelector('#link').value;
-  initialCards.unshift({name:title, link:link})
+  initialCards.unshift({ name: title, link: link })
   renderCards(initialCards);
   popupAdd.classList.remove('popup_opened');
 
@@ -66,11 +66,16 @@ popupAdd.addEventListener('submit', handleFormSubmit);
 
 
 // Element Карточка
+const popupImage = page.querySelector('.popup_type_image');
+const popupImageImg = popupImage.querySelector('.popup__img');
+const popupImageTitle = popupImage.querySelector('.popup__caption');
+const popupImageCloseButton = popupImage.querySelector('.popup__button-close');
 function renderCard(card, index) {
   const elementTemplate = document.querySelector('#element').content;
   const elementsTable = document.querySelector('.elements');
   const elementInstance = elementTemplate.querySelector('.element').cloneNode(true);
   const deleteButton = elementInstance.querySelector('.element__trash-button');
+  const elementImage = elementInstance.querySelector('.element__image');
   elementInstance.querySelector('.element__image').src = card.link;
   elementInstance.querySelector('.element__title').innerText = card.name;
   elementsTable.appendChild(elementInstance);
@@ -79,11 +84,23 @@ function renderCard(card, index) {
     elementsTable.removeChild(elementInstance);
     delete initialCards[index];
   }
-  
+
+  function openImg() {
+    popupImage.classList.add('popup_opened');
+    popupImageImg.src = card.link;
+    popupImageTitle.innerText = card.name;
+  }
+
+  function closeImg() {
+    popupImage.classList.remove('popup_opened');
+  }
+
+  elementImage.addEventListener('click', openImg);
+  popupImageCloseButton.addEventListener('click', closeImg);
   deleteButton.addEventListener('click', deleteCard);
   elementInstance.querySelector('.element__like-button').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__like-button_active');
-    });
+  });
 
 
 }
