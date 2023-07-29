@@ -22,7 +22,7 @@ function closeEditForm() {
   popupEdit.classList.remove('popup_opened');
 }
 
-function handleFormSubmit(evt) {
+function handleEditFormSubmit(evt) {
   evt.preventDefault();
   popupEdit.classList.remove('popup_opened');
   profTitle.innerText = nameInput.value;
@@ -32,7 +32,7 @@ function handleFormSubmit(evt) {
 
 editButton.addEventListener('click', openEditForm);
 closeEditButton.addEventListener('click', closeEditForm);
-popupEdit.addEventListener('submit', handleFormSubmit);
+popupEdit.addEventListener('submit', handleEditFormSubmit);
 //
 
 
@@ -50,7 +50,7 @@ function openAddForm() {
 function closeAddForm() {
   popupAdd.classList.remove('popup_opened');
 }
-function handleFormSubmit(evt) {
+function handleAddFormSubmit(evt) {
   evt.preventDefault();
   const title = evt.srcElement.querySelector('#title').value;
   const link = evt.srcElement.querySelector('#link').value;
@@ -61,7 +61,7 @@ function handleFormSubmit(evt) {
 }
 addButton.addEventListener('click', openAddForm);
 closeAddButton.addEventListener('click', closeAddForm);
-popupAdd.addEventListener('submit', handleFormSubmit);
+popupAdd.addEventListener('submit', handleAddFormSubmit);
 //
 
 
@@ -77,6 +77,7 @@ function renderCard(card, index) {
   const deleteButton = elementInstance.querySelector('.element__trash-button');
   const elementImage = elementInstance.querySelector('.element__image');
   elementInstance.querySelector('.element__image').src = card.link;
+  elementInstance.querySelector('.element__image').alt = card.name;
   elementInstance.querySelector('.element__title').innerText = card.name;
   elementsTable.appendChild(elementInstance);
   function deleteCard() {
@@ -88,6 +89,7 @@ function renderCard(card, index) {
   function openImg() {
     popupImage.classList.add('popup_opened');
     popupImageImg.src = card.link;
+    popupImageImg.alt = card.name;
     popupImageTitle.innerText = card.name;
   }
 
