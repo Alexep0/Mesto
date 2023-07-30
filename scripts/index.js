@@ -20,13 +20,13 @@ const jobInput = popupEdit.querySelector('#job');
 const profTitle = content.querySelector('.profile__title');
 const profDesc = content.querySelector('.profile__description');
 
-editButton.addEventListener('click', function () { 
+editButton.addEventListener('click', function () {
   openPopup(popupEdit);
   nameInput.value = profTitle.innerText;
   jobInput.value = profDesc.innerText;
 });
 closeEditButton.addEventListener('click', function () {
-   closePopup(popupEdit)
+  closePopup(popupEdit)
 });
 popupEdit.addEventListener('submit', function (evt) {
   evt.preventDefault();
@@ -60,7 +60,7 @@ function handleAddFormSubmit(evt) {
   popupAdd.classList.remove('popup_opened');
 
 }
-addButton.addEventListener('click', function () { 
+addButton.addEventListener('click', function () {
   openPopup(popupAdd);
 });
 closeAddButton.addEventListener('click', function () {
@@ -76,43 +76,6 @@ const popupImageImg = popupImage.querySelector('.popup__img');
 const popupImageTitle = popupImage.querySelector('.popup__caption');
 const popupImageCloseButton = popupImage.querySelector('.popup__button-close');
 const elementTemplate = document.querySelector('#element').content;
-
-/*function renderCard(card, index) {
-  const elementTemplate = document.querySelector('#element').content;
-  const elementsTable = document.querySelector('.elements');
-  const elementInstance = elementTemplate.querySelector('.element').cloneNode(true);
-  const deleteButton = elementInstance.querySelector('.element__trash-button');
-  const elementImage = elementInstance.querySelector('.element__image');
-  elementInstance.querySelector('.element__image').src = card.link;
-  elementInstance.querySelector('.element__image').alt = card.name;
-  elementInstance.querySelector('.element__title').innerText = card.name;
-  elementsTable.appendChild(elementInstance);
-  function deleteCard() {
-    deleteButton.removeEventListener('click', deleteCard);
-    elementsTable.removeChild(elementInstance);
-    delete initialCards[index];
-  }
-
-  function openImg() {
-    popupImage.classList.add('popup_opened');
-    popupImageImg.src = card.link;
-    popupImageImg.alt = card.name;
-    popupImageTitle.innerText = card.name;
-  }
-
-  function closeImg() {
-    popupImage.classList.remove('popup_opened');
-  }
-
-  elementImage.addEventListener('click', openImg);
-  popupImageCloseButton.addEventListener('click', closeImg);
-  deleteButton.addEventListener('click', deleteCard);
-  elementInstance.querySelector('.element__like-button').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__like-button_active');
-  });
-
-
-}*/
 
 function createCard(card, index) {
   const elementInstance = elementTemplate.querySelector('.element').cloneNode(true);
@@ -149,16 +112,19 @@ function createCard(card, index) {
   return elementInstance;
 }
 
-popupImageCloseButton.addEventListener('click', function () {
-  closePopup(popupImage);
-});
-
 function renderCards(cardsData) {
   const elementsTable = document.querySelector('.elements');
   elementsTable.innerText = '';
   cardsData.forEach(createCard);
 }
 
+
+popupImageCloseButton.addEventListener('click', function () {
+  closePopup(popupImage);
+});
+
+
+renderCards(initialCards);
 
 
 const initialCards = [
@@ -187,10 +153,6 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
-renderCards(initialCards);
-
-
 //
 
 
