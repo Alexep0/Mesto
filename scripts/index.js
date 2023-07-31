@@ -44,22 +44,16 @@ const addButton = content.querySelector('.profile__add-button');
 const closeAddButton = popupAdd.querySelector('.popup__button-close');
 
 
-function openAddForm() {
-  popupAdd.classList.add('popup_opened');
-}
-
-function closeAddForm() {
-  popupAdd.classList.remove('popup_opened');
-}
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
-  const title = evt.srcElement.querySelector('#title').value;
-  const link = evt.srcElement.querySelector('#link').value;
-  initialCards.unshift({ name: title, link: link })
-  renderCards(initialCards);
-  popupAdd.classList.remove('popup_opened');
-
+  const card = {
+    name: evt.srcElement.querySelector('#title').value,
+    link: evt.srcElement.querySelector('#link').value
+  }
+  addCard(createCard(card));
+  closePopup(popupAdd);
 }
+
 addButton.addEventListener('click', function () {
   openPopup(popupAdd);
 });
@@ -76,8 +70,9 @@ const popupImageImg = popupImage.querySelector('.popup__img');
 const popupImageTitle = popupImage.querySelector('.popup__caption');
 const popupImageCloseButton = popupImage.querySelector('.popup__button-close');
 const elementTemplate = document.querySelector('#element').content;
+const elementsTable = document.querySelector('.elements');
 
-function createCard(card, index) {
+function createCard(card) {
   const elementInstance = elementTemplate.querySelector('.element').cloneNode(true);
 
   elementInstance.querySelector('.element__image').src = card.link;
@@ -96,8 +91,6 @@ function createCard(card, index) {
     evt.target.classList.toggle('element__like-button_active');
   });
 
-  const elementsTable = document.querySelector('.elements');
-  elementsTable.appendChild(elementInstance);
 
   const elementImage = elementInstance.querySelector('.element__image');
 
@@ -112,19 +105,13 @@ function createCard(card, index) {
   return elementInstance;
 }
 
-function renderCards(cardsData) {
-  const elementsTable = document.querySelector('.elements');
-  elementsTable.innerText = '';
-  cardsData.forEach(createCard);
+function addCard(card) {
+  elementsTable.prepend(card)
 }
-
 
 popupImageCloseButton.addEventListener('click', function () {
   closePopup(popupImage);
 });
-
-
-renderCards(initialCards);
 
 
 const initialCards = [
@@ -153,6 +140,11 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+
+initialCards.forEach((card) =>{
+addCard(createCard(card))
+});
 //
 
 
