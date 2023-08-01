@@ -29,12 +29,6 @@ function closePopupOverlay(evt) {
 }
 //
 
-// Валидация форм
-function enableValidation(form){
-  
-}
-//
-
 
 // popup Профиль
 const popupEdit = page.querySelector('.popup_type_edit')

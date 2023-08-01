@@ -50,6 +50,8 @@
 
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__input-invalid/form__input-invalid.css);
 @import url(../blocks/form/__input-error/form__input-error.css);
 @import url(../blocks/form/__input-error/_active/form__input-error_active.css);
 @import url(../blocks/form/__submit/form__submit.css);
+@import url(../blocks/form/__submit-disabled/form__submit-disabled.css);

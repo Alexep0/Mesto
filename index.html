@@ -46,7 +46,7 @@
                 <input type="text" name="job" id="job" placeholder="О себе" minlength="2" maxlength="200"
                     class="form__input" required>
                 <span class="form__input-error form__job-error"></span>
-                <button type="submit" class="form__submit">Сохранить</button>
+                <button type="submit" class="form__submit form__submit-disabled">Сохранить</button>
             </form>
         </div>
     </div>
@@ -56,12 +56,16 @@
             <button type="button" class="popup__button-close"></button>
             <h3 class="popup__title">Новое место</h3>
             <form action="#" class="popup__form form" name="add-form" novalidate>
-                <input type="text" name="title" id="title" placeholder="Название" minlength="2" maxlength="30"
+                <div>
+                    <input type="text" name="title" id="title" placeholder="Название" minlength="2" maxlength="30"
                     class="form__input" required>
-                <span class="form__input-error form__title-error"></span>
-                <input type="url" name="link" id="link" placeholder="Ссылка на картинку" class="form__input" required>
-                <span class="form__input-error form__link-error"></span>
-                <button type="submit" class="form__submit">Создать</button>
+                    <span class="form__input-error form__title-error"></span>
+                </div>
+                <div>
+                  <input type="url" name="link" id="link" placeholder="Ссылка на картинку" class="form__input" required>
+                  <span class="form__input-error form__link-error"></span>
+                 </div>
+                <button type="submit" class="form__submit form__submit-disabled">Создать</button>
             </form>
         </div>
     </div>
@@ -88,6 +92,7 @@
     </template>
 
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
 </body>
 
 </html>
