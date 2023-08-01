@@ -27,3 +27,8 @@
       max-width: 238px;
     }
   }
+
+  .form__input:invalid {
+    border-bottom: 1px solid red; /* красная рамка для некорректных данных */
+  } 
+  

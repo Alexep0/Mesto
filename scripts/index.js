@@ -1,13 +1,40 @@
 const page = document.querySelector('.page');
 const content = document.querySelector('.content');
 
+// фунции открытия и закрытия popup
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEsc);
+  popup.addEventListener('mousedown', closePopupOverlay);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc);
+  popup.removeEventListener('mousedown', closePopupOverlay);
 }
+
+function closePopupEsc(evt) {
+  if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
+}
+
+function closePopupOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
+}
+//
+
+// Валидация форм
+function enableValidation(form){
+  
+}
+//
+
 
 // popup Профиль
 const popupEdit = page.querySelector('.popup_type_edit')
@@ -30,9 +57,9 @@ closeEditButton.addEventListener('click', function () {
 });
 popupEdit.addEventListener('submit', function (evt) {
   evt.preventDefault();
-  closePopup(popupEdit)
   profTitle.innerText = nameInput.value;
   profDesc.innerText = jobInput.value;
+  closePopup(popupEdit)
 });
 //
 
@@ -52,6 +79,7 @@ function handleAddFormSubmit(evt) {
   }
   addCard(createCard(card));
   closePopup(popupAdd);
+  evt.srcElement.reset();
 }
 
 addButton.addEventListener('click', function () {

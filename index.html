@@ -28,61 +28,7 @@
             <button type="button" class="profile__add-button" aria-label="profile-add"></button>
         </section>
 
-        <section class="elements">
-            <!-- <div class="element">
-                <img class="element__image" src="./images/Карачаевск.jpg" alt="Карачаевск">
-                <button type="button" class="element__trash-button"></button>
-                <div class="element__bottom-block">
-                    <h3 class="element__title">Карачаевск</h3>
-                    <button type="button" class="element__like-button"></button>
-                </div>
-            </div>
-
-            <div class="element">
-                <img class="element__image" src="./images/Домбай.jpg" alt="Домбай">
-                <button type="button" class="element__trash-button"></button>
-                <div class="element__bottom-block">
-                    <h3 class="element__title">Домбай</h3>
-                    <button type="button" class="element__like-button"></button>
-                </div>
-            </div>
-
-            <div class="element">
-                <img class="element__image" src="./images/Эльбрус.jpg" alt="Эльбрус">
-                <button type="button" class="element__trash-button"></button>
-                <div class="element__bottom-block">
-                    <h3 class="element__title">Гора Эльбрус</h3>
-                    <button type="button" class="element__like-button"></button>
-                </div>
-            </div>
-
-            <div class="element">
-                <img class="element__image" src="./images/Домбай.jpg" alt="Домбай">
-                <button type="button" class="element__trash-button"></button>
-                <div class="element__bottom-block">
-                    <h3 class="element__title">Домбай</h3>
-                    <button type="button" class="element__like-button"></button>
-                </div>
-            </div>
-
-            <div class="element">
-                <img class="element__image" src="./images/Эльбрус.jpg" alt="Эльбрус">
-                <button type="button" class="element__trash-button"></button>
-                <div class="element__bottom-block">
-                    <h3 class="element__title">Гора Эльбрус</h3>
-                    <button type="button" class="element__like-button"></button>
-                </div>
-            </div>
-
-            <div class="element">
-                <img class="element__image" src="./images/Карачаевск.jpg" alt="Карачаевск">
-                <button type="button" class="element__trash-button"></button>
-                <div class="element__bottom-block">
-                    <h3 class="element__title">Карачаевск</h3>
-                    <button type="button" class="element__like-button"></button>
-                </div>
-            </div>-->
-        </section>
+        <section class="elements"></section>
     </main>
 
     <footer class="footer">
@@ -96,8 +42,10 @@
             <form action="#" class="popup__form form" name="profile-form" novalidate>
                 <input type="text" name="name" id="name" placeholder="Имя" minlength="2" maxlength="40"
                     class="form__input" required>
+                <span class="form__input-error form__name-error"></span>
                 <input type="text" name="job" id="job" placeholder="О себе" minlength="2" maxlength="200"
                     class="form__input" required>
+                <span class="form__input-error form__job-error"></span>
                 <button type="submit" class="form__submit">Сохранить</button>
             </form>
         </div>
@@ -110,7 +58,9 @@
             <form action="#" class="popup__form form" name="add-form" novalidate>
                 <input type="text" name="title" id="title" placeholder="Название" minlength="2" maxlength="30"
                     class="form__input" required>
+                <span class="form__input-error form__title-error"></span>
                 <input type="url" name="link" id="link" placeholder="Ссылка на картинку" class="form__input" required>
+                <span class="form__input-error form__link-error"></span>
                 <button type="submit" class="form__submit">Создать</button>
             </form>
         </div>
