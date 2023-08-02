@@ -23,7 +23,7 @@ function closePopupEsc(evt) {
 
 function closePopupOverlay(evt) {
   if (evt.target === evt.currentTarget) {
-    const popup = document.querySelector('.popup_opened');
+    const popup = document.querySelector(evt.target);
     closePopup(popup);
   }
 }
@@ -63,7 +63,7 @@ const popupAdd = page.querySelector('.popup_type_add')
 
 const addButton = content.querySelector('.profile__add-button');
 const closeAddButton = popupAdd.querySelector('.popup__button-close');
-
+const submitButton = popupAdd.querySelector('.form__submit');
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
@@ -78,6 +78,8 @@ function handleAddFormSubmit(evt) {
 
 addButton.addEventListener('click', function () {
   openPopup(popupAdd);
+  submitButton.classList.add('form__submit-disabled');
+  submitButton.disabled = true;
 });
 closeAddButton.addEventListener('click', function () {
   closePopup(popupAdd);

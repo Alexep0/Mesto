@@ -19,6 +19,7 @@ const checkInputValidity = (formElement, inputElement, inputErrorClass, errorCla
         inputElement.classList.add('form__input-invalid');
     } else {
         hideInputError(formElement, inputElement, inputErrorClass, errorClass);
+        inputElement.classList.remove('form__input-invalid');
     }
 };
 
