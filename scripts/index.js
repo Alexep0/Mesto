@@ -1,3 +1,18 @@
+import Card  from "./Card.js";
+import FormValidator from "./FormValidator.js";
+const formList = Array.from(document.querySelectorAll('.popup__form'));
+formList.forEach((formElement) => {
+  const formValidator = new FormValidator({
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__submit',
+    inactiveButtonClass: 'form__submit-disabled',
+    inputErrorClass: 'form__input-error',
+    errorClass: 'form__input-error_active',
+    invalidClass: 'form__input-invalid'
+  }, formElement);
+
+  formValidator.enableValidation();
+})
 
 const page = document.querySelector('.page');
 const content = document.querySelector('.content');
@@ -167,9 +182,14 @@ const initialCards = [
 ];
 
 
-initialCards.forEach((card) =>{
+/*initialCards.forEach((card) =>{
   addCard(createCard(card))
+});*/
+
+
+
+
+initialCards.forEach((card) =>{
+  addCard(new Card(card, elementTemplate));
 });
-
-
 
