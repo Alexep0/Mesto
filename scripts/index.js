@@ -1,3 +1,4 @@
+
 const page = document.querySelector('.page');
 const content = document.querySelector('.content');
 
@@ -167,8 +168,8 @@ const initialCards = [
 
 
 initialCards.forEach((card) =>{
-addCard(createCard(card))
+  addCard(createCard(card))
 });
-//
+
 
 
