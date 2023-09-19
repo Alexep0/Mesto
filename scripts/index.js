@@ -1,6 +1,8 @@
 import Card  from "./Card.js";
 import FormValidator from "./FormValidator.js";
 const formList = Array.from(document.querySelectorAll('.popup__form'));
+const elementTemplate = document.querySelector('#element').content;
+
 formList.forEach((formElement) => {
   const formValidator = new FormValidator({
     inputSelector: '.form__input',
@@ -13,6 +15,13 @@ formList.forEach((formElement) => {
 
   formValidator.enableValidation();
 })
+
+const openImgPopup = (name, link) => {
+  openPopup(popupImage);
+  popupImageImg.src = link;
+  popupImageImg.alt = name;
+  popupImageTitle.innerText = name;
+};
 
 const page = document.querySelector('.page');
 const content = document.querySelector('.content');
@@ -48,10 +57,8 @@ function closePopupOverlay(evt) {
 
 // popup Профиль
 const popupEdit = page.querySelector('.popup_type_edit')
-
 const editButton = content.querySelector('.profile__edit-button');
 const closeEditButton = popupEdit.querySelector('.popup__button-close');
-
 const nameInput = popupEdit.querySelector('#name');
 const jobInput = popupEdit.querySelector('#job');
 const profTitle = content.querySelector('.profile__title');
@@ -87,7 +94,8 @@ function handleAddFormSubmit(evt) {
     name: evt.srcElement.querySelector('#title').value,
     link: evt.srcElement.querySelector('#link').value
   }
-  addCard(createCard(card));
+  const createeCard = new Card(card, elementTemplate, openImgPopup);
+  addCard(createeCard.generateCard());
   closePopup(popupAdd);
   evt.srcElement.reset();
 }
@@ -109,7 +117,7 @@ const popupImage = page.querySelector('.popup_type_image');
 const popupImageImg = popupImage.querySelector('.popup__img');
 const popupImageTitle = popupImage.querySelector('.popup__caption');
 const popupImageCloseButton = popupImage.querySelector('.popup__button-close');
-const elementTemplate = document.querySelector('#element').content;
+
 const elementsTable = document.querySelector('.elements');
 
 function createCard(card) {
@@ -144,6 +152,10 @@ function createCard(card) {
 
   return elementInstance;
 }
+
+
+
+
 
 function addCard(card) {
   elementsTable.prepend(card)
@@ -190,6 +202,7 @@ const initialCards = [
 
 
 initialCards.forEach((card) =>{
-  addCard(new Card(card, elementTemplate));
+  const createeCard = new Card(card, elementTemplate, openImgPopup);
+  addCard(createeCard.generateCard());
 });
 

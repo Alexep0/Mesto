@@ -9,14 +9,19 @@ export default class FormValidator {
     }
 
     enableValidation() {
+        const inputErrorClass = this._validationConfig.inputErrorClass;
+        const errorClass = this._validationConfig.errorClass;
+        const inputList = this._inputList;
+        const buttonElement = this._buttonElement;
+        const inactiveButtonClass = this._validationConfig.inactiveButtonClass;
         this._form.addEventListener('submit', function (evt) {
             evt.preventDefault();
         });
         this._toggleButtonState(this._inputList, this._buttonElement);
         this._inputList.forEach((inputElement) => {
             inputElement.addEventListener('input',() => {
-                this._checkInputValidity(inputElement, this._validationConfig.inputErrorClass, this._validationConfig.errorClass);
-                this._toggleButtonState(this._inputList, this._buttonElement, this._validationConfig.inactiveButtonClass);
+                this._checkInputValidity(inputElement, inputErrorClass, errorClass);
+                this._toggleButtonState(inputList, buttonElement, inactiveButtonClass);
             });
         });
     };
