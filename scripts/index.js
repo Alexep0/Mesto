@@ -80,7 +80,6 @@ popupEdit.addEventListener('submit', function (evt) {
 });
 //
 
-
 // popup Новое место
 const popupAdd = page.querySelector('.popup_type_add')
 
@@ -88,21 +87,25 @@ const addButton = content.querySelector('.profile__add-button');
 const closeAddButton = popupAdd.querySelector('.popup__button-close');
 const submitButton = popupAdd.querySelector('.form__submit');
 
+function createCard(data, templateSelector, onCardClick) {
+  const createeCard = new Card(data, templateSelector, onCardClick);
+  addCard(createeCard.generateCard());
+}
+
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
   const card = {
     name: evt.srcElement.querySelector('#title').value,
     link: evt.srcElement.querySelector('#link').value
   }
-  const createeCard = new Card(card, elementTemplate, openImgPopup);
-  addCard(createeCard.generateCard());
+  createCard(card, elementTemplate, openImgPopup);
   closePopup(popupAdd);
   evt.srcElement.reset();
 }
 
 addButton.addEventListener('click', function () {
   openPopup(popupAdd);
-  submitButton.classList.add('form__submit-disabled');
+  new FormValidator({submitButtonSelector: '.form__submit', inactiveButtonClass: 'form__submit-disabled'}, popupAdd.querySelector('.popup__form')).disableSubmitButton();
   submitButton.disabled = true;
 });
 closeAddButton.addEventListener('click', function () {
@@ -117,45 +120,7 @@ const popupImage = page.querySelector('.popup_type_image');
 const popupImageImg = popupImage.querySelector('.popup__img');
 const popupImageTitle = popupImage.querySelector('.popup__caption');
 const popupImageCloseButton = popupImage.querySelector('.popup__button-close');
-
 const elementsTable = document.querySelector('.elements');
-
-function createCard(card) {
-  const elementInstance = elementTemplate.querySelector('.element').cloneNode(true);
-
-  elementInstance.querySelector('.element__image').src = card.link;
-  elementInstance.querySelector('.element__image').alt = card.name;
-  elementInstance.querySelector('.element__title').innerText = card.name;
-
-
-  const deleteButton = elementInstance.querySelector('.element__trash-button');
-
-  deleteButton.addEventListener('click', () => {
-    elementInstance.remove()
-  });
-
-
-  elementInstance.querySelector('.element__like-button').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__like-button_active');
-  });
-
-
-  const elementImage = elementInstance.querySelector('.element__image');
-
-  elementImage.addEventListener('click', () => {
-    openPopup(popupImage);
-    popupImageImg.src = card.link;
-    popupImageImg.alt = card.name;
-    popupImageTitle.innerText = card.name;
-  });
-
-
-  return elementInstance;
-}
-
-
-
-
 
 function addCard(card) {
   elementsTable.prepend(card)
@@ -194,15 +159,7 @@ const initialCards = [
 ];
 
 
-/*initialCards.forEach((card) =>{
-  addCard(createCard(card))
-});*/
-
-
-
-
 initialCards.forEach((card) =>{
-  const createeCard = new Card(card, elementTemplate, openImgPopup);
-  addCard(createeCard.generateCard());
+  createCard(card, elementTemplate, openImgPopup);
 });
 
