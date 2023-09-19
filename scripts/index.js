@@ -88,8 +88,8 @@ const closeAddButton = popupAdd.querySelector('.popup__button-close');
 const submitButton = popupAdd.querySelector('.form__submit');
 
 function createCard(data, templateSelector, onCardClick) {
-  const createeCard = new Card(data, templateSelector, onCardClick);
-  addCard(createeCard.generateCard());
+  const card = new Card(data, templateSelector, onCardClick);
+  addCard(card.generateCard());
 }
 
 function handleAddFormSubmit(evt) {
@@ -105,8 +105,6 @@ function handleAddFormSubmit(evt) {
 
 addButton.addEventListener('click', function () {
   openPopup(popupAdd);
-  new FormValidator({submitButtonSelector: '.form__submit', inactiveButtonClass: 'form__submit-disabled'}, popupAdd.querySelector('.popup__form')).disableSubmitButton();
-  submitButton.disabled = true;
 });
 closeAddButton.addEventListener('click', function () {
   closePopup(popupAdd);
