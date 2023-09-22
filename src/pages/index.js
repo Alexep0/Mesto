@@ -1,24 +1,22 @@
-import './index.css';
+import "../pages/index.css";
 import Card  from "../scripts/Card.js";
 import FormValidator from "../scripts/FormValidator.js";
 import PopupWithForm  from "../scripts/PopupWithForm.js";
-import PopupWithEditForm  from "../scripts/PopupWithEditForm.js";
 import PopupWithImage  from "../scripts/PopupWithImage.js";
 import Section  from "../scripts/Section.js";
 import UserInfo  from "../scripts/UserInfo.js";
 import {validationConfig, initialCards} from "../utils/data.js";
 
-const page = document.querySelector('.page');
 const content = document.querySelector('.content');
 const formList = Array.from(document.querySelectorAll('.popup__form'));
 const profTitle = content.querySelector('.profile__title');
 const profDesc = content.querySelector('.profile__description');
 const elementTemplate = document.querySelector('#element').content;
-const popupImage = page.querySelector('.popup_type_image');
 const elementsTable = document.querySelector('.elements');
-const userInfo = new UserInfo(profTitle, profDesc);
-const popupEdit = page.querySelector('.popup_type_edit');
-const popupAdd = page.querySelector('.popup_type_add');
+const popupEdit = '.popup_type_edit';
+const popupAdd = '.popup_type_add';
+const popupImage = '.popup_type_image';
+const userInfo = new UserInfo(profTitle, profDesc, popupEdit);
 const editButton = content.querySelector('.profile__edit-button');
 const addButton = content.querySelector('.profile__add-button');
 
@@ -42,10 +40,9 @@ function renderCards(card){
 }
 
 
-const editForm = new PopupWithEditForm(popupEdit, editButton, handleFormEditSubmit, userInfo);
+const editForm = new PopupWithForm(popupEdit, editButton, handleFormEditSubmit);
 function handleFormEditSubmit(inputs){
   userInfo.setUserInfo(inputs.name, inputs.job)
-  userInfo.getUserInfo(profTitle, profDesc)
 };
 
 const addForm = new PopupWithForm(popupAdd, addButton, handleFormAddSubmit);
@@ -54,9 +51,10 @@ function handleFormAddSubmit(inputs){
     name: inputs.title,
     link: inputs.link
   };
-  section.addItem(createCard(card, elementTemplate, new PopupWithImage(popupImage)));
+  section.addItem(createCard(card, elementTemplate, popupWithImg.open.bind(popupWithImg, card.link, card.name)));
 };
 
+userInfo.setEventListeners();
 section.renderItems();
 editForm.setEventListeners();
 addForm.setEventListeners();
