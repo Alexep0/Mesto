@@ -28,7 +28,8 @@ formList.forEach((formElement) => {
   formValidator.enableValidation();
 });
 
-function profileData() {
+function setEditButtonClick() {
+  //setInputValues вставляет в форму объект данных, полученный из getUserInfo.
   editButton.addEventListener('click', () => editForm.setInputValues(userInfo.getUserInfo()))
 }
 
@@ -46,7 +47,6 @@ function renderCards(card){
 const editForm = new PopupWithForm(popupEdit, editButton, handleFormEditSubmit);
 function handleFormEditSubmit(inputs){
   userInfo.setUserInfo(inputs.name, inputs.job);
-  profileData();
 };
 
 const addForm = new PopupWithForm(popupAdd, addButton, handleFormAddSubmit);
@@ -62,4 +62,4 @@ section.renderItems();
 editForm.setEventListeners();
 addForm.setEventListeners();
 popupWithImg.setEventListeners();
-profileData();
+setEditButtonClick();

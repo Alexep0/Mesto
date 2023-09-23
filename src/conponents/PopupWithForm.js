@@ -34,7 +34,8 @@ export default class PopupWithForm extends Popup {
     }
 
     setInputValues(data) {
-        this._form.querySelector('#name').value = data.name; 
-        this._form.querySelector('#job').value = data.job; 
+        this._inputsList.forEach((input) => {
+            input.value = data[input.name];
+          });
       }
 }
