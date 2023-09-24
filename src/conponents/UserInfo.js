@@ -17,7 +17,6 @@ export default class UserInfo {
   }
 
   getUserInfo = () => {
-    console.log(this._id);
     return {
       name: this._nameInput.textContent,
       job: this._jobInput.textContent,

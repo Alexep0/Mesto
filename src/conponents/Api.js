@@ -1,4 +1,4 @@
-class Api {
+export default class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
@@ -30,6 +30,9 @@ class Api {
     return fetch(this._baseUrl + `/users/me`, {
       headers: this._headers,
     }).then(this._getData)
+    .catch((err) => {
+      console.log(`Error: ${err.status}. ${err.statusText}`);
+    })
   }
 
   addNewCard(body) {
@@ -73,10 +76,3 @@ class Api {
   }
 }
 
-export const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-75',
-  headers: {
-    authorization: 'a7be79c3-197b-4b62-bc05-c705055e13fb',
-    'Content-Type': 'application/json'
-  }
-}); 
