@@ -16,7 +16,10 @@
     <main class="content">
         <section class="profile">
             <div class="profile__card">
-                <img class="profile__avatar" src="<%=require('./images/avatar-loading.png')%>" alt="Аватар">
+                <div class="profile__avatar-cont">
+                    <img class="profile__avatar" src="" alt="Аватар">
+                    <img class="profile__avatar-mouse-on">
+                </div>
                 <div class="profile__info">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
                     <button type="button" class="profile__edit-button" aria-label="profile-edit"></button>
@@ -57,14 +60,39 @@
             <form action="#" class="popup__form form" name="add-form" novalidate>
                 <div>
                     <input type="text" name="title" id="title" placeholder="Название" minlength="2" maxlength="30"
-                    class="form__input" required>
+                        class="form__input" required>
                     <span class="form__input-error form__title-error"></span>
                 </div>
                 <div>
-                  <input type="url" name="link" id="link" placeholder="Ссылка на картинку" class="form__input" required>
-                  <span class="form__input-error form__link-error"></span>
-                 </div>
-                <button type="submit" class="form__submit form__submit-disabled">Создать</button>
+                    <input type="url" name="link" id="link" placeholder="Ссылка на картинку" class="form__input"
+                        required>
+                    <span class="form__input-error form__link-error"></span>
+                </div>
+                <button type="submit" class="form__submit form__submit-disabled">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="popup popup_type_delete">
+        <div class="popup__container">
+            <button type="button" class="popup__button-close"></button>
+            <h3 class="popup__title">Вы уверены?</h3>
+            <form action="#" class="popup__form form" name="confirm-form" novalidate>
+                <button type="submit" class="form__submit">Да</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="popup popup_type_avatar">
+        <div class="popup__container">
+            <button type="button" class="popup__button-close"></button>
+            <h3 class="popup__title">Обновить аватар</h3>
+            <form action="#" class="popup__form form" name="avatar-form" novalidate>
+                <div>
+                    <input type="url" name="link" id="link" placeholder="Ссылка на fdfnfh" class="form__input" required>
+                    <span class="form__input-error form__link-error"></span>
+                </div>
+                <button type="submit" class="form__submit form__submit-disabled">Сохранить</button>
             </form>
         </div>
     </div>
@@ -85,7 +113,10 @@
             <button type="button" class="element__trash-button"></button>
             <div class="element__bottom-block">
                 <h3 class="element__title"></h3>
-                <button type="button" class="element__like-button"></button>
+                <div>
+                    <button type="button" class="element__like-button"></button>
+                    <p class="element__like-counter"></p>
+                </div>
             </div>
         </div>
     </template>
