@@ -13,8 +13,6 @@
     transition: 0.3s ease;
     margin: 0;
     background-color: black;
-    box-shadow: inset 0px 0px 1px rgba(0,0,0,0.5);
-    overflow:hidden;
   }
   .profile__avatar-mouse-on:hover {
     opacity: 0.8;
