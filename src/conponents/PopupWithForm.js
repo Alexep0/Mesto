@@ -15,13 +15,7 @@ export default class PopupWithForm extends Popup {
             evt.preventDefault();
             this._getInputValues();
             this.renderLoading(true);
-            this._handleFormSubmit(this._formValues)
-            .then((prom) => {
-                this.close()
-            })
-            .finally((prom) => {
-                this.renderLoading(false)
-            });
+            this._handleFormSubmit(this._formValues);
         });
         this._buttonOpen.addEventListener('click', () => {
             this.open();

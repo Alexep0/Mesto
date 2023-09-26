@@ -24,15 +24,11 @@ const api = new Api({
   }
 }); 
 
-let userInfo;
+const userInfo = new UserInfo(profTitle, profDesc, avatar);
 
 const userInfoPromise = api.getUserInfo()
-.then((data) => {
-  userInfo = new UserInfo(profTitle, profDesc, avatar, data);
-  userInfo.setUserInfo(data);
-})
 .catch((err) => {
-  console.log(`Error: ${err.status}. ${err.statusText}`);
+  console.log(err);
 })
 
 
@@ -43,11 +39,15 @@ function renderCards(card) {
 
 const cardsDataPromise = api.getInitialCards()
 .catch((err) => {
-  console.log(`Error: ${err.status}. ${err.statusText}`);
+  console.log(err);
 })
 
 Promise.all([userInfoPromise, cardsDataPromise]).then((promises) => {
+  userInfo.setUserInfo(promises[0]);
   section.renderItems(promises[1]);
+})
+.catch((err) => {
+  console.log(err);
 })
 
 const formList = Array.from(document.querySelectorAll('.popup__form'));
@@ -83,7 +83,7 @@ function handleLike(card) {
     card.setLikes(res.likes);
   })
   .catch((err) => {
-    console.log(`Error: ${err.status}. ${err.statusText}`);
+    console.log(err);
   })
 }
 
@@ -93,7 +93,7 @@ function handleDislike(card) {
     card.setLikes(res.likes);
   })
   .catch((err) => {
-    console.log(`Error: ${err.status}. ${err.statusText}`);
+    console.log(err);
   })
 }
 
@@ -106,41 +106,54 @@ function createCard(data, templateSelector, onCardClick) {
 
 const popupEditProfile = new PopupWithForm(popupEdit, editButton, handleFormEditSubmit);
 function handleFormEditSubmit(inputs) {
+  popupEditProfile.renderLoading(true);
   return api.setUserInfo({ name: inputs.name, about: inputs.job })
     .then(res => {
       userInfo.setUserInfo(res);
+      popupEditProfile.close();
     })
     .catch((err) => {
-      console.log(`Error: ${err.status}. ${err.statusText}`);
+      console.log(err);
+    })
+    .finally(() => {
+      popupEditProfile.renderLoading(false);
     })
 };
 
 const popupAddCard = new PopupWithForm(popupAdd, addButton, handleFormAddSubmit);
 
 function handleFormAddSubmit(inputs) {
+  popupAddCard.renderLoading(true);
   const card = {
     name: inputs.title,
     link: inputs.link
   };
-
   return api.addNewCard(card)
   .then((res) => {
-    section.addItem(renderCards(res))
+    section.addItem(renderCards(res));
+    popupAddCard.close();
   })
   .catch((err) => {
-    console.log(`Error: ${err.status}. ${err.statusText}`);
+    console.log(err);
   })
-
+  .finally(() => {
+    popupAddCard.renderLoading(false);
+  })
 };
 
 const avatarForm = new PopupWithForm(popupAvatar, avatarButton, handleAvatarSubmit);
 function handleAvatarSubmit(inputs) {
+  avatarForm.renderLoading(true);
   return api.setUserAvatar(inputs.link)
     .then(res => {
       userInfo.setUserInfo(res);
+      avatarForm.close();
     })
     .catch((err) => {
-      console.log(`Error: ${err.status}. ${err.statusText}`);
+      console.log(err);
+    })
+    .finally(() => {
+      avatarForm.renderLoading(false);
     })
 };
 
